@@ -1,7 +1,7 @@
 package com.example.doctoragenda;
 
+import android.app.ActivityOptions;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
 import org.joda.time.LocalTime;
 
 import java.util.Calendar;
@@ -79,7 +80,9 @@ public class CalendarActivity extends AppCompatActivity {
                         if (!appointments.containsKey(calInstance)) {
                             appointments.put(calInstance, timepicked);
                             dateIntent.putExtra("appointments", appointments);
-                            startActivity(dateIntent);
+                            Bundle bundleAnimation = ActivityOptions.makeCustomAnimation(getApplicationContext(),
+                                    R.anim.left_right, R.anim.right_left).toBundle();
+                            startActivity(dateIntent, bundleAnimation);
                         }
                     }
                 }
